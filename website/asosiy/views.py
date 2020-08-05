@@ -3,6 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from asosiy.models import Asosiy
 from asosiy.serializers import AsosiySerializer 
+from rest_framework import viewsets
 
 
 @csrf_exempt
@@ -31,3 +32,8 @@ def asosiy_detail(request, pk):
     if request.method == 'GET':
         serializer = SnippetSerializer(snippet)
         return JsonResponse(serializer.data)
+
+
+class AsosiyViewSet(viewsets.ModelViewSet):
+    queryset = Asosiy.objects.all().order_by('number')
+    serializer_class = AsosiySerializer
