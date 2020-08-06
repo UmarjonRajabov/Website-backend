@@ -18,6 +18,7 @@ router.register(r'groups', views.GroupViewSet)
 urlpatterns = [
     path('api/asosiy', include('asosiy.urls')),
     path('admin/', admin.site.urls),
+    path('',include('service.urls')),
     path('api/portfolio/', include('portfolio.urls')),
     path('api/services/', include('service.urls')),
     path('hello/', HelloView.as_view(), name='hello'),
