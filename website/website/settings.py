@@ -25,7 +25,7 @@ SECRET_KEY = '_58gnz)u_zje5)%7(+@__jbhks8%*2xasg0qn)jl-y4b98c&#+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'asosiy',
     'portfolio',
     'service',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -126,5 +127,9 @@ STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  # <-- And here
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
 }
