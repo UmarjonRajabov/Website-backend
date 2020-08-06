@@ -30,7 +30,7 @@ class HelloView(APIView):
 class ServiceView(generics.ListCreateAPIView):
     model=get_user_model()
     permission_classes = [
-        permissions.AllowAny
+        permissions.IsAdminUser
     ]
     queryset = ServiceModel.objects.all()
     serializer_class = jwtserializer
@@ -47,7 +47,7 @@ class Service(generics.RetrieveUpdateDestroyAPIView):
 class Detailstodo(generics.RetrieveUpdateDestroyAPIView):
     model = get_user_model()
     permission_classes = [
-        permissions.AllowAny
+        permissions.IsAdminUser
     ]
     queryset = ServiceModel.objects.all()
     serializer_class = jwtserializer
