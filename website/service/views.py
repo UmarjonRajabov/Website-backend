@@ -28,12 +28,11 @@ class HelloView(APIView):
 
 
 class ServiceView(generics.ListCreateAPIView):
-    model=get_user_model()
-    permission_classes = [
-        permissions.IsAdminUser
-    ]
     queryset = ServiceModel.objects.all()
     serializer_class = jwtserializer
+    permission_classes = [
+        permissions.IsAdminUser,
+    ]
 
 
 '''To Display All Data present in service'''
