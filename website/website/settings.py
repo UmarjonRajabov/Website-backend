@@ -28,7 +28,7 @@ SECRET_KEY = '_58gnz)u_zje5)%7(+@__jbhks8%*2xasg0qn)jl-y4b98c&#+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1','umarjonapp.herokuapp.com']
 
 
 # Application definition
@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'asosiy',
     'portfolio',
     'service',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'gunicorn'
 ]
 
 MIDDLEWARE = [
