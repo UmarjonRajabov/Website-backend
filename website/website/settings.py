@@ -11,9 +11,11 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 import datetime
 import os
+import django_heroku
 
 
 from django.conf import settings
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -46,8 +48,26 @@ INSTALLED_APPS = [
     'portfolio',
     'service',
     'rest_framework.authtoken',
-    'gunicorn'
+    'gunicorn',
+    'drf_yasg',
+    'authentication',
+    'corsheaders',
 ]
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        "Auth Token eg [Bearer (JWT) ]": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'authentication.backends.JWTAuthentication',
+    )
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -155,3 +175,23 @@ REST_FRAMEWORK = {
 # 'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=100),
 # 'JWT_ALLOW_REFRESH': True,
 }
+
+
+# CORS WHITELIST
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+    "https://relaxed-curie-e9a516.netlify.app",
+    "http://127.0.0.1:8080"
+]
+
+CORS_ORIGIN_REGEX_WHITELIST = [
+    r"^https://\w+\.netlify\.app$",
+]
+
+# JWT
+JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.2/howto/static-files/
+
+django_heroku.settings(locals())
